@@ -48,7 +48,7 @@ export default function SiteHeader() {
                 priority
               />
               <div className="flex items-center min-w-0">
-                <span className="font-extrabold text-slate-900 text-[10px] xs:text-xs sm:text-sm md:text-base whitespace-nowrap tracking-tight">
+                <span className="font-extrabold text-slate-900 text-[10px] sm:text-sm md:text-base whitespace-nowrap tracking-tight">
                   Dream Ads <span className="text-blue-700">Multi Solutions</span>
                 </span>
               </div>

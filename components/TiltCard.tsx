@@ -3,9 +3,8 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
 /**
- * Interactive 3D tilt card — tilts toward cursor within a perspective stage.
- * Usage: <TiltCard> …content… </TiltCard> inside a perspective container,
- * or rely on the built-in .perspective-stage wrapper.
+ * Interactive 3D tilt card — tilts toward cursor on sm+ screens (>=640px).
+ * Below sm the card stays flat for clean mobile readability.
  */
 export default function TiltCard({ children, className = '' }: { children: ReactNode; className?: string }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -15,6 +14,7 @@ export default function TiltCard({ children, className = '' }: { children: React
     const stage = stageRef.current;
     const card = cardRef.current;
     if (!stage || !card) return;
+    const mq = window.matchMedia('(min-width: 640px)');
 
     const onMove = (e: MouseEvent) => {
       const rect = stage.getBoundingClientRect();
@@ -27,10 +27,22 @@ export default function TiltCard({ children, className = '' }: { children: React
     const onLeave = () => {
       card.style.transform = 'rotateY(-7deg) rotateX(4deg)';
     };
+    const onChange = () => {
+      if (mq.matches) {
+        card.style.transform = 'rotateY(-7deg) rotateX(4deg)';
+        stage.addEventListener('mousemove', onMove);
+        stage.addEventListener('mouseleave', onLeave);
+      } else {
+        card.style.transform = 'none';
+        stage.removeEventListener('mousemove', onMove);
+        stage.removeEventListener('mouseleave', onLeave);
+      }
+    };
 
-    stage.addEventListener('mousemove', onMove);
-    stage.addEventListener('mouseleave', onLeave);
+    onChange();
+    mq.addEventListener('change', onChange);
     return () => {
+      mq.removeEventListener('change', onChange);
       stage.removeEventListener('mousemove', onMove);
       stage.removeEventListener('mouseleave', onLeave);
     };
@@ -38,11 +50,7 @@ export default function TiltCard({ children, className = '' }: { children: React
 
   return (
     <div ref={stageRef} className="perspective-stage">
-      <div
-        ref={cardRef}
-        className={`card-3d ${className}`}
-        style={{ transform: 'rotateY(-7deg) rotateX(4deg)' }}
-      >
+      <div ref={cardRef} className={`card-3d ${className}`}>
         {children}
       </div>
     </div>

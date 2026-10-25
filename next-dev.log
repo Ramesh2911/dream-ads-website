@@ -7,40 +7,38 @@
   - Environments: .env.local
 
  ✓ Starting...
- ✓ Ready in 5.7s
- ○ Compiling /_not-found ...
- ✓ Compiled / in 28.6s (658 modules)
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- GET / 200 in 22329ms
- GET /_next/static/webpack/03523464ac6a18a9.webpack.hot-update.json 404 in 31069ms
- GET / 200 in 3084ms
- ○ Compiling /contact ...
- ✓ Compiled /contact in 5.6s (718 modules)
- GET /contact 200 in 7151ms
- ○ Compiling /services ...
- ✓ Compiled /services in 1665ms (725 modules)
- GET /services 200 in 2614ms
- ○ Compiling /pricing ...
- ✓ Compiled /pricing in 1688ms (729 modules)
- GET /pricing 200 in 2273ms
- ○ Compiling /faq ...
- ✓ Compiled /faq in 917ms (738 modules)
- GET /faq 200 in 1267ms
+ ✓ Ready in 5.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 15.3s (682 modules)
+ GET / 200 in 16288ms
  ○ Compiling /about ...
- ✓ Compiled /about in 1909ms (757 modules)
- GET /about 200 in 2264ms
- ○ Compiling /portfolio ...
- ✓ Compiled /portfolio in 1079ms (768 modules)
- GET /portfolio 200 in 1589ms
- ○ Compiling /calculator ...
- ✓ Compiled /calculator in 2.3s (786 modules)
- GET /calculator 200 in 2723ms
- ○ Compiling /careers ...
- ✓ Compiled /careers in 2.6s (798 modules)
- GET /careers 200 in 3249ms
- ○ Compiling /privacy ...
- ✓ Compiled /privacy in 1466ms (807 modules)
- GET /privacy 200 in 1932ms
+ ✓ Compiled /about in 12.9s (700 modules)
+ GET /about 200 in 13324ms
+ ○ Compiling /services ...
+ ✓ Compiled /services in 550ms (691 modules)
+ GET /services 200 in 780ms
  ○ Compiling /services/[slug] ...
- ✓ Compiled /services/[slug] in 1794ms (815 modules)
- GET /services/custom-it-software 200 in 5952ms
+ ✓ Compiled /services/[slug] in 618ms (700 modules)
+ GET /services/custom-it-software 200 in 2065ms
+ ○ Compiling /pricing ...
+ ✓ Compiled /pricing in 521ms (703 modules)
+ GET /pricing 200 in 802ms
+ ○ Compiling /faq ...
+ ✓ Compiled /faq in 560ms (712 modules)
+ GET /faq 200 in 779ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 3.4s (762 modules)
+ GET /contact 200 in 3844ms
+ ○ Compiling /portfolio ...
+ ✓ Compiled /portfolio in 1686ms (787 modules)
+ GET /portfolio 200 in 2046ms
+ ○ Compiling /calculator ...
+ ✓ Compiled /calculator in 1329ms (805 modules)
+ GET /calculator 200 in 1521ms
+ ○ Compiling /careers ...
+ ✓ Compiled /careers in 1351ms (817 modules)
+ GET /careers 200 in 1568ms
+ ○ Compiling /privacy ...
+ ✓ Compiled /privacy in 646ms (812 modules)
+ GET /privacy 200 in 830ms
+ GET / 200 in 530ms

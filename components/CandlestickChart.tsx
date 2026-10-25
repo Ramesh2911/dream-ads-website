@@ -282,7 +282,7 @@ export default function CandlestickChart() {
                 range === r ? 'bg-corp-blue text-white' : 'text-slate-400 hover:text-white'
               }`}
             >
-              {r}{r === '1Y' ? ' (+342%)' : ''}
+              {r}{r === '1Y' ? <span className="hidden sm:inline"> (+342%)</span> : ''}
             </button>
           ))}
         </div>
