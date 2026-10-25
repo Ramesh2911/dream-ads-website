@@ -116,18 +116,18 @@ function ContactFormInner() {
 
   if (done) {
     return (
-      <div className="glass p-8 sm:p-10 text-center">
-        <span className="w-16 h-16 rounded-2xl bg-grad-cyan flex items-center justify-center mx-auto shadow-glow-cyan">
-          <CheckCircle2 className="w-8 h-8 text-obsidian" />
+      <div className="corp-card p-8 sm:p-10 text-center">
+        <span className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto">
+          <CheckCircle2 className="w-8 h-8 text-emerald-600" />
         </span>
-        <h3 className="font-display font-extrabold text-white text-2xl mt-6">Inquiry received</h3>
-        <p className="mt-3 text-body max-w-md mx-auto">
+        <h3 className="font-display font-extrabold text-slate-900 text-2xl mt-6">Inquiry received</h3>
+        <p className="mt-3 text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
           Thanks{values.name ? `, ${values.name.split(' ')[0]}` : ''} — our team will review your message and respond
           by email, usually within 1 business day.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <a href="/" className="btn-primary">Back to home</a>
-          <a href="/portfolio" className="btn-ghost">See our work</a>
+          <a href="/" className="btn-corp">Back to home</a>
+          <a href="/portfolio" className="btn-outline">See our work</a>
         </div>
       </div>
     );
@@ -142,7 +142,7 @@ function ContactFormInner() {
       : true;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="glass p-6 sm:p-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="corp-card p-6 sm:p-8">
       {/* Stepper */}
       <div className="flex items-center gap-2 mb-7">
         {steps.map((s, i) => (
@@ -152,16 +152,16 @@ function ContactFormInner() {
               onClick={() => i < step && setStep(i)}
               className={`w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center border transition-all ${
                 i === step
-                  ? 'border-cyan/60 bg-cyan/15 text-cyan shadow-glow-cyan'
+                  ? 'border-corp-blue bg-blue-700 text-white shadow-sm'
                   : i < step
-                    ? 'border-cyan/40 bg-cyan/10 text-cyan cursor-pointer'
-                    : 'border-white/15 text-body/50'
+                    ? 'border-blue-300 bg-blue-50 text-corp-blue cursor-pointer'
+                    : 'border-slate-300 text-slate-400 bg-white'
               }`}
             >
               {i < step ? '✓' : i + 1}
             </button>
-            <span className={`text-xs font-medium hidden sm:block ${i === step ? 'text-white' : 'text-body/50'}`}>{s}</span>
-            {i < steps.length - 1 && <span className={`h-px flex-1 ${i < step ? 'bg-cyan/40' : 'bg-white/10'}`} />}
+            <span className={`text-xs font-medium hidden sm:block ${i === step ? 'text-slate-900' : 'text-slate-400'}`}>{s}</span>
+            {i < steps.length - 1 && <span className={`h-px flex-1 ${i < step ? 'bg-blue-300' : 'bg-slate-200'}`} />}
           </div>
         ))}
       </div>
@@ -170,7 +170,7 @@ function ContactFormInner() {
       {step === 0 && (
         <div className="space-y-5 animate-fade-up">
           <div>
-            <p className="text-xs font-semibold text-body uppercase tracking-wider mb-3">What brings you here?</p>
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">What brings you here?</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {SUBJECTS.map((s) => (
                 <button
@@ -179,13 +179,13 @@ function ContactFormInner() {
                   onClick={() => setValue('subject', s.id, { shouldValidate: true })}
                   className={`text-left p-4 rounded-xl border transition-all duration-200 ${
                     subject === s.id
-                      ? 'border-cyan/50 bg-cyan/10 shadow-glow-cyan'
-                      : 'border-white/[0.08] bg-white/[0.03] hover:border-white/20'
+                      ? 'border-blue-400 bg-blue-50 ring-1 ring-blue-100'
+                      : 'border-slate-200 bg-white hover:border-blue-300 hover:bg-slate-50/70'
                   }`}
                 >
-                  <s.icon className={`w-5 h-5 mb-2 ${subject === s.id ? 'text-cyan' : 'text-body/70'}`} />
-                  <p className="text-sm font-semibold text-white">{s.label}</p>
-                  <p className="text-[11px] text-body/70 mt-0.5">{s.hint}</p>
+                  <s.icon className={`w-5 h-5 mb-2 ${subject === s.id ? 'text-corp-blue' : 'text-slate-500'}`} />
+                  <p className="text-sm font-semibold text-slate-900">{s.label}</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">{s.hint}</p>
                 </button>
               ))}
             </div>
@@ -193,11 +193,8 @@ function ContactFormInner() {
 
           {subject === 'project' && (
             <div>
-              <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2.5">Service needed</label>
-              <select
-                {...register('service')}
-                className="w-full bg-[#0E131D] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan/50 transition-colors"
-              >
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2.5">Service needed</label>
+              <select {...register('service')} className="field">
                 <option value="">Select a service (optional)</option>
                 {SERVICES.map((s) => (
                   <option key={s.slug} value={s.title}>{s.title}</option>
@@ -209,11 +206,11 @@ function ContactFormInner() {
 
           {subject === 'career' && (
             <div>
-              <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2.5">Role you&apos;re applying for</label>
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2.5">Role you&apos;re applying for</label>
               <input
                 {...register('role')}
                 placeholder="e.g. Full-Stack Developer (Node.js / React)"
-                className="w-full bg-[#0E131D] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan/50 transition-colors placeholder:text-body/40"
+                className="field"
               />
             </div>
           )}
@@ -221,15 +218,15 @@ function ContactFormInner() {
           {(subject === 'project' || subject === 'partnership') && (
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2.5">Budget range</label>
-                <select {...register('budget')} className="w-full bg-[#0E131D] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan/50 transition-colors">
+                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2.5">Budget range</label>
+                <select {...register('budget')} className="field">
                   <option value="">Select budget</option>
                   {BUDGETS.map((b) => <option key={b} value={b}>{b}</option>)}
                 </select>
               </div>
               <div>
-                <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2.5">Timeline</label>
-                <select {...register('timeline')} className="w-full bg-[#0E131D] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan/50 transition-colors">
+                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2.5">Timeline</label>
+                <select {...register('timeline')} className="field">
                   <option value="">Select timeline</option>
                   {TIMELINES.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
@@ -244,38 +241,38 @@ function ContactFormInner() {
         <div className="space-y-4 animate-fade-up">
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2">Full name *</label>
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Full name *</label>
               <input {...register('name')} placeholder="Your name" className="field" />
-              {errors.name && <p className="text-red-400 text-xs mt-1.5">{errors.name.message}</p>}
+              {errors.name && <p className="text-red-600 text-xs mt-1.5">{errors.name.message}</p>}
             </div>
             <div>
-              <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2">Email *</label>
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Email *</label>
               <input {...register('email')} type="email" placeholder="you@company.com" className="field" />
-              {errors.email && <p className="text-red-400 text-xs mt-1.5">{errors.email.message}</p>}
+              {errors.email && <p className="text-red-600 text-xs mt-1.5">{errors.email.message}</p>}
             </div>
             <div>
-              <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2">Phone</label>
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Phone</label>
               <input {...register('phone')} placeholder="+91 ..." className="field" />
             </div>
             <div>
-              <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2">Company</label>
+              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Company</label>
               <input {...register('company')} placeholder="Company / organisation" className="field" />
             </div>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2">Message *</label>
+            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Message *</label>
             <textarea
               {...register('message')}
               rows={5}
               placeholder={subject === 'career' ? 'Tell us about the projects you’ve shipped and your GitHub/portfolio…' : 'Describe your requirements, users, deadlines and anything we should know…'}
               className="field resize-y"
             />
-            {errors.message && <p className="text-red-400 text-xs mt-1.5">{errors.message.message}</p>}
+            {errors.message && <p className="text-red-600 text-xs mt-1.5">{errors.message.message}</p>}
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-body uppercase tracking-wider block mb-2">
+            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">
               Attachment {subject === 'career' ? '(CV / portfolio)' : '(brief, PDF)'}
             </label>
             <input
@@ -288,24 +285,24 @@ function ContactFormInner() {
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="w-full flex items-center gap-3 p-4 rounded-xl border border-dashed border-white/15 bg-white/[0.03] hover:border-cyan/40 transition-colors text-left"
+              className="w-full flex items-center gap-3 p-4 rounded-xl border border-dashed border-slate-300 bg-slate-50/60 hover:border-blue-400 hover:bg-blue-50/40 transition-colors text-left"
             >
-              <Paperclip className="w-4.5 h-4.5 text-cyan shrink-0" />
-              <span className="text-sm text-body">
-                {file ? <span className="text-white">{file.name}</span> : 'Click to attach — PDF, DOC/DOCX, PNG, JPG, WEBP, TXT · max 5MB'}
+              <Paperclip className="w-4 h-4 text-corp-blue shrink-0" />
+              <span className="text-sm text-slate-600">
+                {file ? <span className="text-slate-900 font-medium">{file.name}</span> : 'Click to attach — PDF, DOC/DOCX, PNG, JPG, WEBP, TXT · max 5MB'}
               </span>
               {file && (
                 <span
                   role="button"
                   tabIndex={0}
                   onClick={(e) => { e.stopPropagation(); setFile(null); if (fileRef.current) fileRef.current.value = ''; }}
-                  className="ml-auto w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-500/20 cursor-pointer"
+                  className="ml-auto w-7 h-7 rounded-lg bg-slate-200 flex items-center justify-center hover:bg-red-100 hover:text-red-600 cursor-pointer text-slate-500"
                 >
                   <X className="w-3.5 h-3.5" />
                 </span>
               )}
             </button>
-            {fileErr && <p className="text-red-400 text-xs mt-1.5">{fileErr}</p>}
+            {fileErr && <p className="text-red-600 text-xs mt-1.5">{fileErr}</p>}
           </div>
         </div>
       )}
@@ -313,7 +310,7 @@ function ContactFormInner() {
       {/* STEP 3 */}
       {step === 2 && (
         <div className="space-y-4 animate-fade-up">
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] divide-y divide-white/[0.07]">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50/60 divide-y divide-slate-200/80">
             {[
               ['Subject', SUBJECTS.find((s) => s.id === values.subject)?.label ?? values.subject],
               values.service ? ['Service', values.service] : null,
@@ -332,20 +329,20 @@ function ContactFormInner() {
                 const [k, v] = pair as [string, string];
                 return (
                   <div key={k} className="flex justify-between gap-4 px-4 py-3 text-sm">
-                    <span className="text-body/70">{k}</span>
-                    <span className="text-white text-right break-all">{v}</span>
+                    <span className="text-slate-500">{k}</span>
+                    <span className="text-slate-900 text-right break-all font-medium">{v}</span>
                   </div>
                 );
               })}
           </div>
           <div>
-            <p className="text-xs font-semibold text-body uppercase tracking-wider mb-2">Message</p>
-            <p className="text-sm text-body leading-relaxed whitespace-pre-wrap rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Message</p>
+            <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
               {values.message}
             </p>
           </div>
           {serverErr && (
-            <p className="text-red-400 text-sm rounded-xl bg-red-500/10 border border-red-500/25 px-4 py-3">{serverErr}</p>
+            <p className="text-red-700 text-sm rounded-xl bg-red-50 border border-red-200 px-4 py-3">{serverErr}</p>
           )}
         </div>
       )}
@@ -355,20 +352,20 @@ function ContactFormInner() {
         <button
           type="button"
           onClick={() => setStep((s) => Math.max(0, s - 1))}
-          className={`btn-ghost ${step === 0 ? 'invisible' : ''}`}
+          className={`btn-outline ${step === 0 ? 'invisible' : ''}`}
         >
           <ArrowLeft className="w-4 h-4" /> Back
         </button>
 
         {step < 2 ? (
-          <button type="button" onClick={() => setStep((s) => Math.min(2, s + 1))} className="btn-primary" disabled={!canNext}>
+          <button type="button" onClick={() => setStep((s) => Math.min(2, s + 1))} className="btn-corp" disabled={!canNext}>
             Continue <ArrowRight className="w-4 h-4" />
           </button>
         ) : (
-          <button type="submit" disabled={submitting} className="btn-primary !px-8">
+          <button type="submit" disabled={submitting} className="btn-corp !px-8">
             {submitting ? (
               <span className="inline-flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-obsidian/30 border-t-obsidian rounded-full animate-spin" /> Sending…
+                <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Sending…
               </span>
             ) : (
               <>
@@ -384,7 +381,7 @@ function ContactFormInner() {
 
 export default function ContactForm() {
   return (
-    <Suspense fallback={<div className="glass p-8 h-96 animate-pulse" />}>
+    <Suspense fallback={<div className="corp-card p-8 h-96 animate-pulse" />}>
       <ContactFormInner />
     </Suspense>
   );

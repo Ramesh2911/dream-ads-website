@@ -8,7 +8,7 @@ export default function CareerApplyLink({ title }: { title: string }) {
   return (
     <Link
       href={`/contact?subject=career&role=${encodeURIComponent(title)}`}
-      className="btn-primary shrink-0 !py-2.5 text-[13px] self-start sm:self-auto"
+      className="btn-corp shrink-0 !py-2.5 !px-5 text-[13px] self-start sm:self-auto"
     >
       Apply <ArrowUpRight className="w-4 h-4" />
     </Link>

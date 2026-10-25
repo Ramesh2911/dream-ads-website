@@ -6,12 +6,14 @@ export default function CountUp({
   to,
   suffix = '',
   prefix = '',
-  duration = 1500,
+  duration = 2200,
+  decimals = 0,
 }: {
   to: number;
   suffix?: string;
   prefix?: string;
   duration?: number;
+  decimals?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [val, setVal] = useState(0);
@@ -28,22 +30,26 @@ export default function CountUp({
           const tick = (now: number) => {
             const p = Math.min(1, (now - t0) / duration);
             const eased = 1 - Math.pow(1 - p, 3);
-            setVal(Math.round(to * eased));
+            setVal(to * eased);
             if (p < 1) requestAnimationFrame(tick);
           };
           requestAnimationFrame(tick);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.25 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, [to, duration]);
 
+  const formatted = decimals > 0
+    ? val.toFixed(decimals)
+    : Math.round(val).toLocaleString('en-IN');
+
   return (
     <span ref={ref}>
       {prefix}
-      {val.toLocaleString('en-IN')}
+      {formatted}
       {suffix}
     </span>
   );

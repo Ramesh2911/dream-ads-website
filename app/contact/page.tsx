@@ -1,93 +1,108 @@
 import type { Metadata } from 'next';
-import { Mail, Phone, MapPin, Clock, ShieldCheck, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
-import Reveal from '../../components/Reveal';
+import { Mail, MapPin, Phone, Clock, Calculator } from 'lucide-react';
 import ContactForm from '../../components/ContactForm';
+import WhatsAppIcon from '../../components/WhatsAppIcon';
+import Reveal from '../../components/Reveal';
 import { COMPANY } from '../../lib/company';
 
 export const metadata: Metadata = {
-  title: 'Contact — Request a Quote or Talk to Our Team',
+  title: 'Contact — Schedule a Consultation',
   description:
-    'Send a project brief, apply for a role or ask about partnerships. We respond within 1 business day.',
+    'Reach Dream Ads Multi Solutions — Murshidabad, West Bengal. 24-hour response SLA, mutual NDA before technical deep-dives.',
 };
-
-const CARDS = [
-  { icon: Mail, k: 'Email', v: COMPANY.email, href: `mailto:${COMPANY.email}` },
-  { icon: Phone, k: 'Phone', v: COMPANY.phone, href: `tel:${COMPANY.phone.replace(/\s/g, '')}` },
-  { icon: MapPin, k: 'Registered office', v: COMPANY.address },
-  { icon: Clock, k: 'Response time', v: 'Within 1 business day (Mon–Sat)' },
-];
 
 export default function ContactPage() {
   return (
     <>
-      <section className="relative pt-36 pb-14 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.08),transparent_55%)]" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8">
-          <Reveal>
-            <p className="chip bg-cyan/10 text-cyan border border-cyan/25 mb-4">CONTACT</p>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08]">
-              Let&apos;s scope your <span className="grad-text">next build</span>
+      <section className="relative pt-12 pb-14 md:pt-16 bg-white border-b border-slate-200 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50/70 via-white to-white pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="eyebrow">
+              <span className="eyebrow-dot" />
+              Contact
+            </span>
+            <h1 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">
+              Let&apos;s talk about your project
             </h1>
-            <p className="mt-5 text-lg text-body max-w-2xl">
-              Three short steps — tell us what you need, share your details, review and send. Attach a brief or CV if helpful.
+            <p className="mt-4 text-slate-600 leading-relaxed">
+              Fill the wizard or reach us directly — mutual NDA covered, 24-hour response SLA, milestone-based delivery.
             </p>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-5 sm:px-8 pb-20 grid lg:grid-cols-[1.25fr_0.75fr] gap-6 items-start">
-        <Reveal>
-          <ContactForm />
-        </Reveal>
+      <section className="py-16 bg-slate-50/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.3fr_0.7fr] gap-8 items-start">
+          <Reveal>
+            <ContactForm />
+          </Reveal>
 
-        <div className="space-y-4">
-          <Reveal delay={80}>
-            <div className="glass p-6">
-              <p className="font-display font-bold text-white mb-4 flex items-center gap-2">
-                <MessageCircle className="w-4.5 h-4.5 text-cyan" /> Direct channels
-              </p>
-              <div className="space-y-3.5">
-                {CARDS.map((c) => (
-                  <div key={c.k} className="flex gap-3">
-                    <span className="w-9 h-9 rounded-lg bg-cyan/12 text-cyan flex items-center justify-center shrink-0">
-                      <c.icon className="w-4 h-4" />
+          <Reveal delay={120}>
+            <div className="space-y-5">
+              <div className="corp-card p-6">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Direct lines</p>
+                <ul className="space-y-4 text-sm">
+                  <li className="flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 text-corp-blue flex items-center justify-center shrink-0">
+                      <Mail className="w-4 h-4" />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-[11px] uppercase tracking-wider text-body/70 font-semibold">{c.k}</p>
-                      {c.href ? (
-                        <a href={c.href} className="text-sm text-white hover:text-cyan transition-colors break-words">{c.v}</a>
-                      ) : (
-                        <p className="text-sm text-white leading-relaxed break-words">{c.v}</p>
-                      )}
+                      <p className="text-xs text-slate-500">Email</p>
+                      <a href={`mailto:${COMPANY.email}`} className="font-medium text-slate-900 hover:text-corp-blue break-all">{COMPANY.email}</a>
                     </div>
-                  </div>
-                ))}
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 text-corp-blue flex items-center justify-center shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs text-slate-500">Phone</p>
+                      <a href={`tel:${COMPANY.phoneRaw}`} className="font-medium text-slate-900 hover:text-corp-blue">{COMPANY.phone}</a>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
+                      <WhatsAppIcon className="w-4 h-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs text-slate-500">WhatsApp</p>
+                      <a href={COMPANY.whatsapp} target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-700 hover:underline">
+                        Chat on WhatsApp
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 text-corp-blue flex items-center justify-center shrink-0">
+                      <Clock className="w-4 h-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs text-slate-500">Business hours</p>
+                      <p className="font-medium text-slate-900">{COMPANY.hours}</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 text-corp-blue flex items-center justify-center shrink-0">
+                      <MapPin className="w-4 h-4" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-xs text-slate-500">Registered office</p>
+                      <p className="font-medium text-slate-900 leading-relaxed">{COMPANY.address}</p>
+                    </div>
+                  </li>
+                </ul>
               </div>
-            </div>
-          </Reveal>
 
-          <Reveal delay={140}>
-            <div className="glass p-6">
-              <p className="flex items-center gap-2 font-display font-bold text-white mb-2.5 text-sm">
-                <ShieldCheck className="w-4.5 h-4.5 text-cyan" /> Your data stays safe
-              </p>
-              <p className="text-xs text-body leading-relaxed">
-                Submissions are stored securely in our own systems — never sold or shared with third-party marketers.
-                Questions? Read our <Link href="/privacy" className="text-cyan hover:underline">privacy policy</Link>.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={200}>
-            <div className="glass p-6 bg-gradient-to-br from-cyan/[0.07] to-indigo/[0.07]">
-              <p className="font-display font-bold text-white mb-2 text-sm">Prefer a number first?</p>
-              <p className="text-xs text-body leading-relaxed mb-4">
-                Run the instant estimator to get a budget band before we talk.
-              </p>
-              <Link href="/calculator" className="btn-ghost !py-2.5 text-[13px] w-full justify-center">
-                Open cost calculator
-              </Link>
+              <div className="corp-card p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-100">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Not sure of the budget?</p>
+                <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                  Use the instant estimator — pick platform, features and timeline to get a range in seconds.
+                </p>
+                <Link href="/calculator" className="btn-outline !py-2.5 text-[13px] w-full justify-center">
+                  <Calculator className="w-4 h-4" /> Open cost calculator
+                </Link>
+              </div>
             </div>
           </Reveal>
         </div>

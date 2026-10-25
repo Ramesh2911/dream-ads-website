@@ -3,30 +3,105 @@
 @tailwind utilities;
 
 @layer base {
-  html { color-scheme: dark; scroll-behavior: smooth; }
+  html { color-scheme: light; scroll-behavior: smooth; }
   body {
-    @apply bg-obsidian text-body antialiased;
-    font-feature-settings: 'tnum' 1;
+    @apply bg-white text-slate-900 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     overflow-x: hidden;
   }
-  ::selection { @apply bg-cyan/30 text-white; }
-  h1, h2, h3, h4 { @apply text-white; }
+  ::selection { @apply bg-blue-100 text-blue-900; }
+  h1, h2, h3, h4 { @apply text-slate-900; }
 }
 
 @layer components {
-  .glass {
-    background: rgba(18, 24, 38, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px);
-    border-radius: 1rem;
+  /* ---------- eyebrow pill (section kicker) ---------- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200
+      text-blue-700 text-xs font-semibold uppercase tracking-wider;
   }
-  .glass-nav {
-    background: rgba(11, 15, 23, 0.72);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px);
+  .eyebrow-dot {
+    @apply w-2 h-2 rounded-full bg-blue-700 animate-pulse-dot shrink-0;
+  }
+  .eyebrow-emerald {
+    @apply inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200
+      text-emerald-800 text-xs font-semibold uppercase tracking-wider;
   }
 
-  /* scroll reveal */
+  /* ---------- buttons ---------- */
+  .btn-corp {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md font-display font-semibold text-sm
+      text-white bg-corp-blue hover:bg-corp-blueHover shadow-sm
+      hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm
+      text-slate-800 bg-white border border-slate-300 hover:bg-slate-50 shadow-sm
+      hover:-translate-y-0.5 transition-all duration-200;
+  }
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md font-display font-semibold text-sm
+      text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 shadow-sm
+      hover:-translate-y-0.5 transition-all duration-200;
+  }
+  .btn-whatsapp-solid {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-display font-bold text-xs
+      text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm transition-all duration-200;
+  }
+
+  /* ---------- cards ---------- */
+  .corp-card {
+    @apply bg-white rounded-2xl border border-slate-200/90 shadow-sm
+      transition-all duration-300;
+  }
+  .corp-card-hover {
+    @apply hover:shadow-corp-card-hover hover:-translate-y-1.5;
+  }
+
+  /* ---------- stat number 3D ---------- */
+  .stat-number-3d {
+    text-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- 3D perspective card ---------- */
+  .perspective-stage { perspective: 1200px; perspective-origin: 50%; }
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s;
+    transform: rotateY(-7deg) rotateX(4deg);
+  }
+  .card-3d:hover {
+    transform: rotateY(-2deg) rotateX(2deg) translateY(-6px);
+    box-shadow: 0 30px 60px -15px rgba(29, 78, 216, 0.12), 0 0 0 1px rgba(29, 78, 216, 0.15);
+  }
+  .preserve-3d { transform-style: preserve-3d; }
+  .transform-layer-front { transform: translateZ(30px); }
+  .transform-layer-mid { transform: translateZ(15px); }
+
+  /* ---------- floating label inputs ---------- */
+  .floating-group { position: relative; }
+  .floating-input {
+    @apply w-full peer px-4 pt-6 pb-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900
+      outline-none focus:border-corp-blue focus:ring-2 focus:ring-blue-100 transition-all;
+  }
+  .floating-label {
+    @apply absolute left-4 top-4 text-sm text-slate-500 pointer-events-none origin-left
+      transition-all duration-200;
+  }
+  .floating-input:focus ~ .floating-label,
+  .floating-input:not(:placeholder-shown) ~ .floating-label {
+    @apply text-corp-blue;
+    transform: translateY(-1.15rem) scale(0.8);
+  }
+
+  /* ---------- plain field (non-floating) ---------- */
+  .field {
+    @apply w-full bg-white border border-slate-300 rounded-lg px-4 py-3 text-sm text-slate-900
+      outline-none focus:border-corp-blue focus:ring-2 focus:ring-blue-100 transition-colors
+      placeholder:text-slate-400;
+  }
+
+  /* ---------- reveal on scroll ---------- */
   .reveal {
     opacity: 0;
     transform: translateY(28px);
@@ -35,62 +110,51 @@
   }
   .reveal.revealed { opacity: 1; transform: none; }
 
-  /* hover glow card */
-  .glow-card {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.35s, box-shadow 0.35s;
-  }
-  .glow-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(0, 229, 255, 0.10), transparent 55%);
-    opacity: 0;
-    transition: opacity 0.35s;
-    pointer-events: none;
-  }
-  .glow-card:hover::after { opacity: 1; }
-  .glow-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(0, 229, 255, 0.35);
-    box-shadow: 0 18px 46px -22px rgba(0, 229, 255, 0.45);
+  /* ---------- testimonial slide ---------- */
+  .testimonial-card-slide {
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
   }
 
-  .grad-text {
-    background: linear-gradient(90deg, #00E5FF, #6366F1, #00E5FF);
-    background-size: 220% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: gradShift 7s ease infinite;
-  }
-  @keyframes gradShift {
-    0%,100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+  /* ---------- beacon pulse ---------- */
+  .beacon-ring {
+    @apply absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-beacon-pulse;
   }
 
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-semibold text-sm
-      text-obsidian bg-grad-cyan shadow-glow-cyan
-      hover:opacity-90 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200;
+  /* ---------- copy button ---------- */
+  .copy-btn {
+    @apply p-2 rounded-lg bg-white border border-slate-200 text-slate-400
+      hover:text-corp-blue hover:border-blue-400 transition-all;
   }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-semibold text-sm
-      text-white border border-white/15 hover:bg-white/[0.06] hover:border-white/25 hover:-translate-y-0.5 transition-all duration-200;
-  }
-
-  .chip {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium;
+  .copy-btn.copied {
+    @apply text-emerald-600 bg-emerald-50 border-emerald-300;
   }
 
-  .field {
-    @apply w-full bg-[#0E131D] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white
-      outline-none focus:border-cyan/50 transition-colors placeholder:text-body/40;
+  /* ---------- FAQ details ---------- */
+  .faq-item {
+    @apply rounded-xl border border-slate-200 bg-white overflow-hidden transition-all duration-200 shadow-sm;
+  }
+  .faq-item[open] {
+    @apply border-blue-300 ring-1 ring-blue-100;
+  }
+  .faq-summary {
+    @apply flex items-center justify-between p-4 cursor-pointer list-none select-none
+      hover:bg-slate-50/70 transition-colors;
+  }
+  .faq-summary::-webkit-details-marker { display: none; }
+
+  /* ---------- grid pattern bg ---------- */
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+      linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .grad-text { animation: none !important; }
+  .card-3d { transform: none !important; }
+  .animate-beacon-pulse, .animate-bullish-glow, .animate-float-soft { animation: none !important; }
 }

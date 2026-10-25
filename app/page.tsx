@@ -1,300 +1,405 @@
 import Link from 'next/link';
 import {
-  Gamepad2, Building2, Smartphone, Cloud, Code2, ArrowUpRight, ArrowRight,
-  ShieldCheck, Gauge, Users, Server, Terminal, Layers,
+  MapPin, ShieldCheck, Clock, ArrowRight, Building2, CircleCheck,
+  TrendingUp, Droplets, PieChart, Server, Activity, ArrowUpRight, Gauge, Users, Code2,
 } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import CountUp from '../components/CountUp';
-import Magnetic from '../components/Magnetic';
-import ParticleCanvas from '../components/ParticleCanvas';
-import EstimatorWidget from '../components/EstimatorWidget';
-import { SERVICES, PROJECTS } from '../lib/data';
+import TiltCard from '../components/TiltCard';
+import SectionHead from '../components/SectionHead';
+import CandlestickChart from '../components/CandlestickChart';
+import { COMPANY } from '../lib/company';
+import { SERVICES, MILESTONES, PROJECTS } from '../lib/data';
+
+const TONE_ICON = { blue: 'bg-blue-50 border-blue-100 text-blue-700', emerald: 'bg-emerald-50 border-emerald-100 text-emerald-700', indigo: 'bg-indigo-50 border-indigo-100 text-indigo-700', purple: 'bg-purple-50 border-purple-100 text-purple-700' } as const;
+const TONE_CHIP = { blue: 'text-emerald-700 bg-emerald-50 border-emerald-100', emerald: 'text-emerald-700 bg-emerald-50 border-emerald-100', indigo: 'text-blue-700 bg-blue-50 border-blue-100', purple: 'text-purple-700 bg-purple-50 border-purple-100' } as const;
+const TONE_DOT = { blue: 'bg-emerald-500', emerald: 'bg-blue-600', indigo: 'bg-indigo-500', purple: 'bg-emerald-500' } as const;
+const MILESTONE_ICONS = [Server, ShieldCheck, Activity, Code2];
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <TechTicker />
-      <BentoGrid />
-      <Metrics />
-      <EstimatorSection />
+      <Milestones />
+      <ServicesPreview />
+      <GrowthEngine />
       <FeaturedWork />
-      <ProcessStrip />
       <CTA />
     </>
   );
 }
 
-/* ============ HERO ============ */
+/* ============================== HERO ============================== */
+
 function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden pt-24">
-      <div className="absolute inset-0">
-        <ParticleCanvas className="absolute inset-0 w-full h-full" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0B0F17_78%)]" />
-        <div className="absolute -top-40 left-1/4 w-[520px] h-[520px] rounded-full bg-cyan/10 blur-[130px]" />
-        <div className="absolute bottom-0 right-1/5 w-[460px] h-[460px] rounded-full bg-indigo/15 blur-[120px]" />
-      </div>
+    <section className="relative pt-10 pb-16 md:pt-16 md:pb-24 bg-white overflow-hidden border-b border-slate-200">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50/70 via-white to-white pointer-events-none" />
+      <div className="absolute -top-32 right-0 w-96 h-96 bg-blue-50/60 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center w-full">
-        <div>
-          <Reveal>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan/10 border border-cyan/25 text-cyan text-xs font-semibold mb-6 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse-dot" />
-              MCA Incorporated · 28 July 2026 · West Bengal, India
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left */}
+          <div className="lg:col-span-6 space-y-6">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-blue-700 animate-pulse-dot" />
+              <span>Enterprise IT &amp; Media Engineering</span>
+              <span className="text-blue-300">|</span>
+              <span className="font-mono text-blue-800">MCA Registered</span>
+            </span>
+
+            <div className="space-y-4">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15] font-display">
+                Architecting Next-Generation{' '}
+                <span className="text-corp-blue">Digital Experiences</span> &amp; Scalable Enterprise Software
+              </h1>
+              <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
+                {COMPANY.legalName} is a full-cycle IT and software engineering enterprise. We build scalable web platforms,
+                native Android &amp; iOS applications, immersive 3D gaming experiences, custom enterprise software and robust
+                cloud infrastructure for modern businesses.
+              </p>
             </div>
-          </Reveal>
 
-          <Reveal delay={80}>
-            <h1 className="font-display text-[2.4rem] leading-[1.07] sm:text-5xl lg:text-[3.6rem] font-extrabold tracking-tight">
-              Architecting Next-Generation{' '}
-              <span className="grad-text">Digital Experiences</span> &amp; Scalable{' '}
-              <span className="grad-text">Enterprise Software.</span>
-            </h1>
-          </Reveal>
-
-          <Reveal delay={160}>
-            <p className="mt-6 text-lg sm:text-xl text-body max-w-2xl leading-relaxed">
-              Multi-disciplinary tech execution across <span className="text-white font-medium">games</span>,{' '}
-              <span className="text-white font-medium">mobile apps</span> and{' '}
-              <span className="text-white font-medium">custom office solutions</span> — engineered by Dream Ads
-              Multi Solutions Private Limited for teams that need enterprise-grade delivery.
-            </p>
-          </Reveal>
-
-          <Reveal delay={240}>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Magnetic href="/contact" className="btn-primary !px-7 !py-4">
-                Request a Quote <ArrowUpRight className="w-4 h-4" />
-              </Magnetic>
-              <Magnetic href="/portfolio" className="btn-ghost !px-7 !py-4">
-                View our work <ArrowRight className="w-4 h-4" />
-              </Magnetic>
-            </div>
-          </Reveal>
-
-          <Reveal delay={320}>
-            <div className="mt-11 grid grid-cols-3 gap-3 max-w-lg">
-              {[
-                { icon: Gauge, l: 'Crash-free', v: '99.5%', s: 'sessions' },
-                { icon: Users, l: 'CCU shipped', v: '50K', s: 'peak' },
-                { icon: ShieldCheck, l: 'Audited', v: 'RBAC', s: 'by default' },
-              ].map((s) => (
-                <div key={s.l} className="glass p-3.5 text-center">
-                  <s.icon className="w-4 h-4 text-cyan mx-auto mb-1.5" />
-                  <p className="font-display font-bold text-white text-lg leading-none">{s.v}</p>
-                  <p className="text-[10px] text-body/70 mt-1">{s.l} · {s.s}</p>
+            {/* credentials card */}
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 shadow-sm space-y-3.5 text-xs text-slate-700 w-full">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-corp-blue shrink-0 shadow-sm mt-0.5">
+                  <MapPin className="w-4 h-4" />
                 </div>
-              ))}
+                <div className="min-w-0 flex-1">
+                  <div className="font-bold text-slate-900 text-sm">Registered Corporate Office (RoC Kolkata)</div>
+                  <p className="font-bold text-slate-800 text-xs sm:text-sm leading-relaxed">{COMPANY.address}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-200/80 font-mono text-[11px]">
+                <div>
+                  <span className="text-slate-500">Statutory CIN:</span>
+                  <span className="font-bold text-slate-800 block text-[10px] sm:text-[11px]">{COMPANY.cin}</span>
+                </div>
+                <div>
+                  <span className="text-slate-500">GSTIN / PAN:</span>
+                  <span className="font-bold text-slate-800 block text-[10px] sm:text-[11px]">{COMPANY.gstin} / {COMPANY.pan}</span>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <span className="text-slate-500">Registry Status:</span>
+                  <span className="font-bold text-emerald-700 block flex items-center gap-1">
+                    <CircleCheck className="w-3 h-3" /> Active (MCA Verified)
+                  </span>
+                </div>
+              </div>
             </div>
-          </Reveal>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+              <Link href="/services" className="btn-corp w-full sm:w-auto">
+                Explore Enterprise Services <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/contact" className="btn-outline w-full sm:w-auto">
+                Schedule Consultation
+                <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500 pt-1 font-medium">
+              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-corp-blue" /> Mutual NDA Covered</span>
+              <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-corp-blue" /> 24-Hour Response SLA</span>
+            </div>
+          </div>
+
+          {/* Right: 3D card */}
+          <div className="lg:col-span-6 flex items-center justify-center">
+            <TiltCard className="relative w-full max-w-lg rounded-2xl bg-white p-3 border border-slate-200 shadow-corp-3d cursor-pointer">
+              {/* floating badge */}
+              <div className="animate-float-soft absolute -top-4 -right-3 sm:-right-4 z-30 px-4 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg flex items-center gap-2.5 text-xs text-slate-900 font-semibold">
+                <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                <span>Corporate HQ • Global Operations</span>
+              </div>
+
+              {/* building image */}
+              <div className="relative rounded-xl overflow-hidden bg-slate-100 aspect-[4/3] border border-slate-100">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+                  alt={`${COMPANY.shortName} Corporate Headquarters`}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 z-20 text-white">
+                  <div className="text-[11px] font-mono tracking-widest uppercase text-blue-300 font-semibold">
+                    {COMPANY.shortName}
+                  </div>
+                  <div className="text-sm font-bold text-white flex items-center justify-between mt-0.5 gap-2">
+                    <span>Executive Technology Center</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-600/80 text-white font-semibold shrink-0">Tier-4 NOC</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* metrics */}
+              <div className="p-4 pt-3.5 grid grid-cols-3 gap-2 text-center text-xs">
+                <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <div className="text-base font-bold font-mono text-slate-900">99.9%</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium">Uptime SLA</div>
+                </div>
+                <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <div className="text-base font-bold font-mono text-corp-blue">128+</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium">Deployments</div>
+                </div>
+                <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <div className="text-base font-bold font-mono text-slate-900">24/7</div>
+                  <div className="text-[10px] text-slate-500 uppercase font-medium">Monitoring</div>
+                </div>
+              </div>
+
+              <div className="text-[10px] text-center text-slate-400 font-mono pt-1 pb-1">
+                Interactive 3D Card — move cursor to tilt
+              </div>
+            </TiltCard>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================== MILESTONES ============================== */
+
+function Milestones() {
+  return (
+    <section id="milestones" className="py-14 md:py-16 bg-white border-b border-slate-200 relative overflow-hidden">
+      <div className="absolute inset-0 grid-pattern pointer-events-none opacity-60" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <SectionHead
+          eyebrow="Enterprise Scale Metrics"
+          title="Proven Architecture & Milestone Velocity"
+          mono="Real-Time Node Verified"
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          {MILESTONES.map((m, i) => {
+            const Icon = MILESTONE_ICONS[i];
+            return (
+              <Reveal key={m.label} delay={i * 80}>
+                <div className="corp-card corp-card-hover p-6 relative group overflow-hidden h-full">
+                  <div className={`absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl pointer-events-none ${TONE_ICON[m.tone].split(' ')[0]}/50 group-hover:${TONE_ICON[m.tone].split(' ')[0]}/60 transition-colors`} />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`w-10 h-10 rounded-xl border flex items-center justify-center text-lg group-hover:scale-110 transition-transform shadow-sm ${TONE_ICON[m.tone]}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full border ${TONE_CHIP[m.tone]}`}>
+                      {m.chip}
+                    </span>
+                  </div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono tracking-tight stat-number-3d">
+                    <CountUp to={m.value} decimals={m.decimals ?? 0} suffix={m.suffix} />
+                  </div>
+                  <div className="text-sm font-bold text-slate-900 mt-2">{m.label}</div>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">{m.desc}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================== SERVICES PREVIEW ============================== */
+
+function ServicesPreview() {
+  return (
+    <section id="services" className="py-20 md:py-24 bg-slate-50/70 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <SectionHead
+          eyebrow="Enterprise Engineering & Solutions"
+          title="Core Enterprise Services & Capabilities"
+          lede="High-density engineering architecture, dedicated software execution, gaming infrastructure and digital monetization pipelines."
+          align="center"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 items-stretch">
+          {SERVICES.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <Reveal key={s.slug} delay={i * 50}>
+                <article className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-sm hover:shadow-corp-card-hover hover:-translate-y-1.5 transition-all duration-300 h-full flex flex-col justify-between group">
+                  <div>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="w-12 h-12 rounded-xl bg-blue-50/80 border border-blue-200/60 flex items-center justify-center text-corp-blue group-hover:bg-corp-blue group-hover:text-white transition-colors duration-200 shadow-sm">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-slate-300">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-corp-blue transition-colors font-display">
+                      {s.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">{s.short}</p>
+                    <div className="pt-2 pb-4 border-t border-slate-100">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-bold mb-2.5">Key Deliverables</div>
+                      <ul className="space-y-2 text-xs text-slate-700 font-medium">
+                        {s.deliverables.map((d) => (
+                          <li key={d} className="flex items-start gap-2">
+                            <CircleCheck className="w-3.5 h-3.5 text-corp-blue mt-0.5 shrink-0" />
+                            <span>{d}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-slate-100 space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200/80 text-[11px] font-mono font-semibold text-slate-700">
+                      <Gauge className="w-3 h-3 text-corp-blue" />
+                      <span>{s.slaChip}</span>
+                    </div>
+                    <Link href={`/services/${s.slug}`} className="flex items-center justify-between text-xs font-semibold text-corp-blue hover:text-corp-blueHover group/link">
+                      <span>Explore Architecture</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
 
-        {/* Console / terminal card */}
-        <Reveal delay={200}>
-          <div className="relative">
-            <div className="absolute -inset-5 bg-grad-indigo/25 blur-3xl rounded-full" />
-            <div className="relative glass p-0 overflow-hidden shadow-2xl">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.08]">
-                <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-                <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-                <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-                <span className="ml-2 text-[11px] font-mono text-body/60">dreamads — deploy.sh</span>
-              </div>
-              <div className="p-5 font-mono text-[12.5px] leading-relaxed space-y-2.5">
-                <p className="text-body/70">$ dream-ads build --target <span className="text-cyan">all-platforms</span></p>
-                <p className="text-[#28C840]">✓ compiling game engine modules ......... 1,204 files</p>
-                <p className="text-[#28C840]">✓ bundling enterprise ERP suite ......... 892 files</p>
-                <p className="text-[#28C840]">✓ mobile pipelines (android/ios) ......... passed</p>
-                <p className="text-[#28C840]">✓ infra: nginx + docker + backups ........ healthy</p>
-                <p className="text-indigo">→ deploying to production cluster ......... <span className="text-cyan">live</span></p>
-                <p className="text-body/70 pt-1">
-                  $ <span className="inline-block w-2 h-4 bg-cyan align-middle animate-pulse-dot" />
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        <div className="text-center mt-12">
+          <Link href="/services" className="btn-corp">
+            View All Services <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ============ TECH TICKER ============ */
-function TechTicker() {
-  const items = ['Unity', 'Three.js', 'Next.js', 'React Native', 'Flutter', 'Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'Docker', 'Nginx', 'WebRTC', 'TypeScript', 'AWS'];
-  return (
-    <div className="relative border-y border-white/[0.07] bg-[#080B12]/70 py-4 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-      <div className="flex w-max animate-marquee-x gap-10 whitespace-nowrap">
-        {[...items, ...items, ...items, ...items].map((t, i) => (
-          <span key={i} className="text-sm font-mono text-body/50 hover:text-cyan transition-colors">{t}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
+/* ============================== GROWTH ENGINE ============================== */
 
-/* ============ SERVICES BENTO ============ */
-const ICONS = { game: Gamepad2, software: Building2, mobile: Smartphone, web: Code2, cloud: Cloud };
-
-function BentoGrid() {
-  return (
-    <section id="services" className="relative max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
-      <Reveal className="max-w-2xl mb-12">
-        <p className="chip bg-cyan/10 text-cyan border border-cyan/25 mb-4">CORE SERVICES</p>
-        <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-          Five verticals. <span className="grad-text">One engineering standard.</span>
-        </h2>
-        <p className="mt-4 text-body text-lg">
-          Games, enterprise software, mobile, web and cloud — delivered with the same architecture discipline.
-        </p>
-      </Reveal>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[minmax(180px,auto)]">
-        {SERVICES.map((s, i) => {
-          const Icon = ICONS[s.icon];
-          const big = i === 0 || i === 3;
-          return (
-            <Reveal key={s.slug} delay={i * 70} className={big ? 'lg:row-span-1 lg:col-span-1' : ''}>
-              <Link
-                href={`/services/${s.slug}`}
-                className={`glow-card glass p-6 h-full flex flex-col group ${big ? 'md:col-span-2 lg:col-span-1' : ''}`}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <span
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${
-                      s.accent === 'cyan' ? 'bg-cyan/15 text-cyan shadow-glow-cyan' : 'bg-indigo/15 text-indigo shadow-glow-indigo'
-                    }`}
-                  >
-                    <Icon className="w-6 h-6" />
-                  </span>
-                  <ArrowUpRight className="w-5 h-5 text-body/30 group-hover:text-cyan transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
-                </div>
-                <h3 className="font-display font-bold text-white text-lg">{s.title}</h3>
-                <p className="mt-2 text-sm text-body leading-relaxed flex-1">{s.short}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {s.stack.slice(0, 4).map((t) => (
-                    <span key={t} className="chip bg-white/[0.04] border border-white/[0.08] text-body/70 text-[10.5px]">{t}</span>
-                  ))}
-                </div>
-              </Link>
-            </Reveal>
-          );
-        })}
-
-        {/* CTA cell */}
-        <Reveal delay={340}>
-          <div className="glow-card glass p-6 h-full flex flex-col justify-center items-start bg-gradient-to-br from-cyan/[0.08] to-indigo/[0.08]">
-            <Layers className="w-7 h-7 text-cyan mb-3" />
-            <h3 className="font-display font-bold text-white">Not sure where to start?</h3>
-            <p className="mt-2 text-sm text-body flex-1">Run the instant cost estimator and get a scope range in seconds.</p>
-            <Link href="/calculator" className="btn-primary mt-4 !py-2.5 text-[13px]">Open Calculator <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ============ METRICS ============ */
-function Metrics() {
-  const items = [
-    { icon: Terminal, to: 128, suffix: '+', label: 'Projects delivered', sub: 'across 5 verticals' },
-    { icon: Server, to: 99, suffix: '%', label: 'System uptime', sub: 'monitored fleets' },
-    { icon: Code2, to: 2, suffix: 'M+', label: 'Lines of code', sub: 'maintained' },
-    { icon: ShieldCheck, to: 40, suffix: '+', label: 'Cloud architectures', sub: 'verified & documented' },
+function GrowthEngine() {
+  const kpis = [
+    { label: 'YoY Delivery Growth', value: '+128%', tone: 'text-emerald-600', dot: 'bg-emerald-500', icon: TrendingUp },
+    { label: 'System Liquidity', value: '99.9%', tone: 'text-slate-900', dot: 'bg-blue-600', icon: Droplets },
+    { label: 'Capital Efficiency', value: '4.2x ROI', tone: 'text-corp-blue', dot: 'bg-indigo-500', icon: PieChart },
+    { label: 'Throughput Telemetry', value: '860K req/s', tone: 'text-slate-900', dot: 'bg-emerald-500', icon: Activity },
   ];
+
   return (
-    <section className="relative border-y border-white/[0.07] bg-[#080B12]/60">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {items.map((m, i) => (
-          <Reveal key={m.label} delay={i * 90}>
-            <div className="glow-card glass p-6 text-center h-full">
-              <m.icon className="w-5 h-5 text-cyan mx-auto mb-3" />
-              <p className="font-display font-extrabold text-white text-3xl sm:text-4xl tracking-tight">
-                <CountUp to={m.to} suffix={m.suffix} />
-              </p>
-              <p className="mt-2 text-sm font-medium text-white/90">{m.label}</p>
-              <p className="text-xs text-body/60 mt-0.5">{m.sub}</p>
+    <section id="growth-engine" className="py-20 md:py-24 bg-white border-b border-slate-200 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-emerald-50/40 rounded-full blur-3xl" />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-4">
+          <div className="max-w-2xl">
+            <span className="eyebrow-emerald">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-dot" />
+              Financial &amp; Performance Telemetry
+            </span>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
+              Bullish Enterprise Growth Engine
+            </h2>
+            <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+              Live production telemetry across client deployments — continuous delivery velocity with zero-loss architecture practices.
+            </p>
+          </div>
+          {/* beacon */}
+          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-3 sm:px-4 shadow-sm flex items-center gap-3 shrink-0">
+            <span className="relative flex h-3 w-3 shrink-0">
+              <span className="beacon-ring" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600 self-center ml-0.5" />
+            </span>
+            <div className="font-mono text-[11px] leading-tight">
+              <p className="text-slate-900 font-bold">CONTINUOUS BULL RUN</p>
+              <p className="text-slate-500">100% Green Delivery • 0 Missed SLAs</p>
             </div>
-          </Reveal>
-        ))}
+          </div>
+        </div>
+
+        {/* KPI cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {kpis.map((k) => (
+            <div key={k.label} className="p-5 rounded-2xl bg-slate-50/80 border border-slate-200/90 shadow-sm">
+              <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-1">{k.label}</p>
+              <p className={`text-3xl font-extrabold font-mono stat-number-3d ${k.tone}`}>{k.value}</p>
+              <p className="flex items-center gap-1.5 mt-2 text-[11px] text-slate-600 font-medium">
+                <span className={`w-1.5 h-1.5 rounded-full ${k.dot}`} /> Verified
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <CandlestickChart />
+
+        {/* bottom accents */}
+        <div className="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-2xl mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          {[
+            { icon: TrendingUp, bg: 'bg-emerald-100', fg: 'text-emerald-700', title: 'Continuous Scaling', sub: 'Pipeline-driven delivery across all verticals.' },
+            { icon: Droplets, bg: 'bg-blue-100', fg: 'text-blue-700', title: 'Zero Drawdown Cycles', sub: 'Every milestone gate signed off before the next.' },
+            { icon: PieChart, bg: 'bg-indigo-100', fg: 'text-indigo-700', title: 'Capital Efficiency', sub: 'Startup-friendly budgets with enterprise rigor.' },
+          ].map((a) => (
+            <div key={a.title} className="flex items-start gap-3">
+              <div className={`w-7 h-7 rounded-lg ${a.bg} ${a.fg} flex items-center justify-center shrink-0`}>
+                <a.icon className="w-4 h-4" />
+              </div>
+              <div>
+                <p className="font-bold text-slate-900">{a.title}</p>
+                <p className="text-slate-500 mt-0.5">{a.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-/* ============ ESTIMATOR ============ */
-function EstimatorSection() {
-  return (
-    <section className="max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
-      <Reveal>
-        <p className="chip bg-indigo/15 text-indigo border border-indigo/30 mb-4">LIVE ESTIMATOR</p>
-        <h2 className="font-display text-3xl sm:text-4xl font-extrabold leading-tight">
-          Know your <span className="grad-text">scope range</span> before you talk to sales.
-        </h2>
-        <p className="mt-4 text-body leading-relaxed">
-          Pick a platform, stack on features, choose your timeline — the estimator returns an instant budget band and
-          duration so your planning starts with real numbers.
-        </p>
-        <ul className="mt-6 space-y-3 text-sm">
-          {[
-            { icon: IndianRupeeIcon(), t: 'Transparent INR ranges', d: 'Based on delivered project data' },
-            { icon: ClockIcon(), t: 'Duration modeling', d: 'Adjusted by pace & complexity' },
-            { icon: ShieldCheck, t: 'No obligation', d: 'Instant — no email required' },
-          ].map((x) => (
-            <li key={x.t} className="flex items-start gap-3 text-body">
-              <span className="mt-0.5 w-6 h-6 rounded-lg bg-cyan/15 flex items-center justify-center shrink-0">
-                <span className="text-cyan text-xs">✓</span>
-              </span>
-              <span><span className="text-white font-medium">{x.t}</span> — {x.d}</span>
-            </li>
-          ))}
-        </ul>
-      </Reveal>
-      <Reveal delay={120}>
-        <EstimatorWidget />
-      </Reveal>
-    </section>
-  );
-}
-function IndianRupeeIcon() {
-  return <span className="text-cyan text-xs font-bold">₹</span>;
-}
-function ClockIcon() {
-  return <span className="text-cyan text-xs font-bold">◷</span>;
-}
+/* ============================== FEATURED WORK ============================== */
 
-/* ============ FEATURED WORK ============ */
 function FeaturedWork() {
   const featured = PROJECTS.slice(0, 3);
   return (
-    <section className="relative border-t border-white/[0.07] bg-[#080B12]/50">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-24">
-        <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <p className="chip bg-cyan/10 text-cyan border border-cyan/25 mb-4">FEATURED WORK</p>
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold">Case studies that shipped</h2>
-          </div>
-          <Link href="/portfolio" className="btn-ghost shrink-0 self-start">Full portfolio <ArrowRight className="w-4 h-4" /></Link>
-        </Reveal>
+    <section className="py-20 md:py-24 bg-slate-50/70 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <SectionHead
+          eyebrow="Delivered Systems"
+          title="Featured Engineering Work"
+          lede="Systems that shipped and stayed shipped."
+        >
+          <Link href="/portfolio" className="btn-outline !py-2.5 !px-4 text-xs mt-4 md:mt-0">
+            View Portfolio <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </SectionHead>
 
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featured.map((p, i) => (
-            <Reveal key={p.id} delay={i * 90}>
-              <Link href="/portfolio" className="glow-card glass p-6 h-full flex flex-col group">
-                <span className={`chip self-start mb-4 ${p.accent === 'cyan' ? 'bg-cyan/15 text-cyan border border-cyan/30' : 'bg-indigo/15 text-indigo border border-indigo/30'}`}>
-                  {p.category}
-                </span>
-                <h3 className="font-display font-bold text-white group-hover:text-cyan transition-colors">{p.title}</h3>
-                <p className="mt-2 text-sm text-body leading-relaxed flex-1">{p.summary}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {p.stack.slice(0, 3).map((t) => (
-                    <span key={t} className="chip bg-white/[0.04] border border-white/[0.08] text-body/70 text-[10.5px] font-mono">{t}</span>
-                  ))}
+            <Reveal key={p.id} delay={i * 80}>
+              <article className="corp-card corp-card-hover p-6 h-full flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-corp-blue font-semibold">
+                      {p.category}
+                    </span>
+                    <Users className="w-4 h-4 text-slate-300" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-corp-blue transition-colors font-display">
+                    {p.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-4">{p.summary}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {p.stack.map((t) => (
+                      <span key={t} className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 border border-slate-200 text-slate-600">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </Link>
+                <Link href="/portfolio" className="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-corp-blue hover:text-corp-blueHover group/link">
+                  <span>Read case study</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                </Link>
+              </article>
             </Reveal>
           ))}
         </div>
@@ -303,56 +408,36 @@ function FeaturedWork() {
   );
 }
 
-/* ============ PROCESS STRIP ============ */
-function ProcessStrip() {
-  const steps = [
-    { n: '01', t: 'Discover', d: 'Requirements, constraints, success metrics' },
-    { n: '02', t: 'Architect', d: 'System design, stack selection, security' },
-    { n: '03', t: 'Build', d: 'Agile sprints, weekly demos, CI/CD' },
-    { n: '04', t: 'Operate', d: 'Launch, monitor, iterate, support' },
-  ];
-  return (
-    <section className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
-      <Reveal className="text-center max-w-2xl mx-auto mb-12">
-        <p className="chip bg-indigo/15 text-indigo border border-indigo/30 mb-4">HOW WE WORK</p>
-        <h2 className="font-display text-3xl sm:text-4xl font-extrabold">From discovery to production</h2>
-      </Reveal>
-      <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
-        {steps.map((s, i) => (
-          <Reveal key={s.n} delay={i * 110}>
-            <div className="glow-card glass p-6 h-full">
-              <div className="w-12 h-12 rounded-2xl bg-grad-cyan flex items-center justify-center font-display font-extrabold text-obsidian shadow-glow-cyan relative z-10 mb-5">
-                {s.n}
-              </div>
-              <p className="font-display font-bold text-white text-lg">{s.t}</p>
-              <p className="mt-1.5 text-sm text-body">{s.d}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
+/* ============================== CTA ============================== */
 
-/* ============ CTA ============ */
 function CTA() {
   return (
-    <section className="relative overflow-hidden border-t border-white/[0.07]">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.10),transparent_60%)]" />
-      <div className="relative max-w-4xl mx-auto px-5 sm:px-8 py-20 text-center">
-        <Reveal>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            Let&apos;s engineer your <span className="grad-text">next system</span>.
-          </h2>
-          <p className="mt-4 text-body text-lg max-w-xl mx-auto">
-            Tell us about your game, app, ERP or platform — we&apos;ll respond with architecture options and a clear estimate.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Magnetic href="/contact" className="btn-primary !px-8 !py-4">Request a Quote <ArrowUpRight className="w-4 h-4" /></Magnetic>
-            <Magnetic href="/calculator" className="btn-ghost !px-8 !py-4">Try the cost calculator</Magnetic>
-          </div>
-        </Reveal>
+    <section className="py-20 md:py-24 bg-white relative overflow-hidden">
+      <div className="absolute -top-40 right-1/4 w-96 h-96 bg-blue-50/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <span className="eyebrow">
+          <span className="eyebrow-dot" />
+          Start Your Engagement
+        </span>
+        <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
+          Let&apos;s engineer your next system.
+        </h2>
+        <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Schedule a consultation with our engineering leads. Mutual NDA covered, 24-hour response SLA, milestone-based delivery.
+        </p>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link href="/contact" className="btn-corp w-full sm:w-auto">
+            Request a Quote <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link href="/calculator" className="btn-outline w-full sm:w-auto">
+            Estimate Your Project
+          </Link>
+        </div>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500 font-medium">
+          <span className="flex items-center gap-1.5"><Building2 className="w-3.5 h-3.5 text-corp-blue" /> MCA Registered Entity</span>
+          <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-corp-blue" /> 100% IP Transfer</span>
+          <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-corp-blue" /> Milestone Delivery</span>
+        </div>
       </div>
     </section>
   );
