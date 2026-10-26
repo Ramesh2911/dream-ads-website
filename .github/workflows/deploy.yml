@@ -1,0 +1,49 @@
+name: Deploy website to cPanel
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-website
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Write runtime env
+        run: |
+          printf 'SITE_URL=https://dreamads.in\nBACKEND_URL=http://127.0.0.1:5000\nINQUIRY_WEBHOOK_URL=\n' > .env.local
+
+      - name: Build
+        run: npm run build
+
+      - name: Pack deploy artifact
+        run: |
+          shopt -s extglob
+          rm -rf pkg deploy.tgz
+          mkdir -p pkg/.next
+          cp -r app components lib public pkg/
+          cp -r .next/!(cache) pkg/.next/
+          cp package.json package-lock.json next.config.mjs server.js \
+             tsconfig.json next-env.d.ts tailwind.config.js postcss.config.mjs .env.local pkg/
+          tar -czf deploy.tgz -C pkg .
+
+      - name: Deploy via cPanel API
+        env:
+          CPANEL_SSO_EMAIL: ${{ secrets.CPANEL_SSO_EMAIL }}
+          CPANEL_SSO_PASSWORD: ${{ secrets.CPANEL_SSO_PASSWORD }}
+        run: bash scripts/cpanel-deploy.sh
