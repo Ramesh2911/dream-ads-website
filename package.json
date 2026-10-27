@@ -6,9 +6,10 @@
     "dev": "next dev -p 3100",
     "build": "next build",
     "start": "next start -p 3100",
-    "setup": "tar -xzf deploy.tgz && npm install --omit=dev --no-audit --no-fund",
+    "setup": "npm install --omit=dev --no-audit --no-fund",
     "extract": "tar -xzf deploy.tgz",
     "wdiag": "pwd && node -v && ls -la | head -30",
+    "viewcheck": "node -e \"console.log('SETUP='+require('./package.json').scripts.setup)\"",
     "typecheck": "tsc --noEmit",
     "lint": "next lint"
   },
