@@ -37,4 +37,5 @@ export const FOOTER_EXTRA_LINKS = [
   { href: '/calculator', label: 'Cost Calculator' },
   { href: '/careers', label: 'Careers' },
   { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/terms', label: 'Terms & Conditions' },
 ] as const;

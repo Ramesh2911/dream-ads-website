@@ -5,7 +5,7 @@ const BASE = process.env.SITE_URL || 'http://localhost:3100';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticRoutes = ['', '/about', '/services', '/portfolio', '/calculator', '/careers', '/contact', '/privacy'].map(
+  const staticRoutes = ['', '/about', '/services', '/portfolio', '/calculator', '/careers', '/contact', '/privacy', '/terms'].map(
     (path) => ({
       url: `${BASE}${path}`,
       lastModified: now,

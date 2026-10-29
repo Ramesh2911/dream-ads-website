@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Menu, X, ArrowRight, Mail, Calculator, Briefcase, Shield } from 'lucide-react';
+import { Menu, X, ArrowRight, Mail, Calculator, Briefcase, Shield, FileText } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import { NAV_LINKS, FOOTER_EXTRA_LINKS, COMPANY } from '../lib/company';
 
@@ -12,6 +12,7 @@ const EXTRA_ICONS: Record<string, typeof Calculator> = {
   '/calculator': Calculator,
   '/careers': Briefcase,
   '/privacy': Shield,
+  '/terms': FileText,
 };
 
 export default function SiteHeader() {
