@@ -407,7 +407,7 @@ export const FAQS: FaqGroup[] = [
       },
       {
         q: 'Are the directors MCA and DIN verified?',
-        a: 'Yes. Both directors hold active Director Identification Numbers (DINs) verified through the MCA portal. Their appointments are on the public registry and available for inspection.',
+        a: 'Yes. Both directors hold active Director Identification Numbers (DINs) allotted by the Ministry of Corporate Affairs — Biswajit Chakraborty (DIN 11857323) and Ranajit Adhikari (DIN 11857324). Their appointments are on the public registry and available for inspection.',
       },
       {
         q: 'How is client data privacy handled?',
@@ -492,7 +492,7 @@ export const LEADERSHIP: Leader[] = [
       'Leads client engagement, scoping and delivery governance',
       'Drives engineering culture, hiring and quality standards',
     ],
-    meta: 'Appointed: 28/07/2026',
+    meta: 'DIN: 11857323 · Appointed: 28/07/2026',
     status: 'Full Operations Lead',
   },
   {
@@ -508,7 +508,7 @@ export const LEADERSHIP: Leader[] = [
       'Financial controls, budgeting & vendor oversight',
       'Compliance, risk management & statutory reporting',
     ],
-    meta: 'DIN: Verified',
+    meta: 'DIN: 11857324',
     status: 'DIN Verified',
   },
   {

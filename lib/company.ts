@@ -9,8 +9,8 @@ export const COMPANY = {
   incorporatedLong: 'July 28, 2026',
   roc: 'RoC - Kolkata (West Bengal)',
   directors: [
-    { name: 'Biswajit Chakraborty', role: 'Director', din: 'DIN — Verified' },
-    { name: 'Ranajit Adhikari', role: 'Director', din: 'DIN — Verified' },
+    { name: 'Biswajit Chakraborty', role: 'Director', din: 'DIN: 11857323' },
+    { name: 'Ranajit Adhikari', role: 'Director', din: 'DIN: 11857324' },
   ],
   ceo: { name: 'Biswajit Chakraborty', role: 'Chief Executive Officer' },
   address: 'Village & P.O. Tenya, P.S. Salar, Murshidabad, West Bengal - 742404, India',
