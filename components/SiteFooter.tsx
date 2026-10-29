@@ -16,7 +16,7 @@ export default function SiteFooter() {
             <Link href="/" className="flex items-center gap-3 w-fit group">
               <Image src="/logo.jpeg" alt={COMPANY.legalName} width={44} height={44} className="h-9 md:h-11 w-auto object-contain rounded" />
               <div>
-                <p className="font-bold text-slate-900 leading-tight">{COMPANY.shortName}</p>
+                <p className="font-bold text-slate-900 leading-tight">{COMPANY.shortName} Pvt Ltd</p>
                 <p className="text-[11px] text-slate-500">{COMPANY.tagline}</p>
               </div>
             </Link>
