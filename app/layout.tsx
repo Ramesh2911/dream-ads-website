@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: `%s | ${COMPANY.shortName}`,
   },
   description:
-    'Full-cycle IT and software engineering enterprise. Custom ERP/CRM, Next.js web portals, native mobile apps, 3D games, multiplayer netcode, OTT streaming and AdTech monetization.',
+    'MCA-registered software company from West Bengal. Custom ERP/CRM, web portals, Android & iOS apps, 3D games, multiplayer servers, video streaming and ad monetization.',
   keywords: ['IT company Murshidabad', 'enterprise software West Bengal', 'mobile app development India', 'game development', 'cloud infrastructure', 'SEO ASO India'],
   openGraph: { title: COMPANY.legalName, type: 'website', images: ['/logo.jpeg?v=2'] },
   icons: { icon: '/logo.jpeg?v=2' },

@@ -20,13 +20,13 @@ export default function ServicesPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="eyebrow">
             <span className="eyebrow-dot" />
-            Enterprise Engineering &amp; Solutions
+            What We Do
           </span>
           <h1 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">
-            Core enterprise services
+            Our services
           </h1>
           <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Nine delivery verticals — from bespoke ERPs to battle-royale netcode — each with defined SLAs, milestone gates and 100% IP transfer.
+            Nine services, from ERP systems to multiplayer game servers — each with a clear timeline, milestone sign-offs and full ownership of the code.
           </p>
         </div>
       </section>

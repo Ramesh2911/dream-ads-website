@@ -43,20 +43,20 @@ function Hero() {
           <div className="lg:col-span-6 space-y-6">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-blue-700 animate-pulse-dot" />
-              <span>Enterprise IT &amp; Media Engineering</span>
+              <span>Web, Apps, Games &amp; Enterprise IT</span>
               <span className="text-blue-300">|</span>
               <span className="font-mono text-blue-800">MCA Registered</span>
             </span>
 
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15] font-display">
-                Architecting Next-Generation{' '}
-                <span className="text-corp-blue">Digital Experiences</span> &amp; Scalable Enterprise Software
+                We build{' '}
+                <span className="text-corp-blue">websites, mobile apps &amp; games</span> and the software that runs your
+                business
               </h1>
               <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                {COMPANY.legalName} is a full-cycle IT and software engineering enterprise. We build scalable web platforms,
-                native Android &amp; iOS applications, immersive 3D gaming experiences, custom enterprise software and robust
-                cloud infrastructure for modern businesses.
+                {COMPANY.legalName} is an MCA-registered software company from Murshidabad, West Bengal. We build
+                websites, Android &amp; iOS apps, 3D games, ERP systems and the cloud setup that keeps them running.
               </p>
             </div>
 
@@ -92,10 +92,10 @@ function Hero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
               <Link href="/services" className="btn-corp w-full sm:w-auto">
-                Explore Enterprise Services <ArrowRight className="w-4 h-4" />
+                See our services <ArrowRight className="w-4 h-4" />
               </Link>
               <Link href="/contact" className="btn-outline w-full sm:w-auto">
-                Schedule Consultation
+                Talk to us
                 <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -173,9 +173,9 @@ function Milestones() {
       <div className="absolute inset-0 grid-pattern pointer-events-none opacity-60" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <SectionHead
-          eyebrow="Enterprise Scale Metrics"
-          title="Proven Architecture & Milestone Velocity"
-          mono="Real-Time Node Verified"
+          eyebrow="By The Numbers"
+          title="Milestones so far"
+          mono="Updated: 2026"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {MILESTONES.map((m, i) => {
@@ -214,9 +214,9 @@ function ServicesPreview() {
     <section id="services" className="py-20 md:py-24 bg-slate-50/70 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <SectionHead
-          eyebrow="Enterprise Engineering & Solutions"
-          title="Core Enterprise Services & Capabilities"
-          lede="High-density engineering architecture, dedicated software execution, gaming infrastructure and digital monetization pipelines."
+          eyebrow="What We Do"
+          title="Services we deliver"
+          lede="Nine services, one team — web, mobile, games, ERP, cloud and the ad work that pays for them."
           align="center"
         />
 
@@ -255,7 +255,7 @@ function ServicesPreview() {
                       <span>{s.slaChip}</span>
                     </div>
                     <Link href={`/services/${s.slug}`} className="flex items-center justify-between text-xs font-semibold text-corp-blue hover:text-corp-blueHover group/link">
-                      <span>Explore Architecture</span>
+                      <span>View details</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -279,10 +279,10 @@ function ServicesPreview() {
 
 function GrowthEngine() {
   const kpis = [
-    { label: 'YoY Delivery Growth', value: '+128%', tone: 'text-emerald-600', dot: 'bg-emerald-500', icon: TrendingUp },
-    { label: 'System Liquidity', value: '99.9%', tone: 'text-slate-900', dot: 'bg-blue-600', icon: Droplets },
-    { label: 'Capital Efficiency', value: '4.2x ROI', tone: 'text-corp-blue', dot: 'bg-indigo-500', icon: PieChart },
-    { label: 'Throughput Telemetry', value: '860K req/s', tone: 'text-slate-900', dot: 'bg-emerald-500', icon: Activity },
+    { label: 'Year On Year Growth', value: '+128%', tone: 'text-emerald-600', dot: 'bg-emerald-500', icon: TrendingUp },
+    { label: 'Uptime', value: '99.9%', tone: 'text-slate-900', dot: 'bg-blue-600', icon: Droplets },
+    { label: 'Client Return', value: '4.2x ROI', tone: 'text-corp-blue', dot: 'bg-indigo-500', icon: PieChart },
+    { label: 'Traffic Handled', value: '860K req/s', tone: 'text-slate-900', dot: 'bg-emerald-500', icon: Activity },
   ];
 
   return (
@@ -295,13 +295,13 @@ function GrowthEngine() {
           <div className="max-w-2xl">
             <span className="eyebrow-emerald">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-dot" />
-              Financial &amp; Performance Telemetry
+              Live Project Numbers
             </span>
             <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
-              Bullish Enterprise Growth Engine
+              How we&apos;re growing
             </h2>
             <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-              Live production telemetry across client deployments — continuous delivery velocity with zero-loss architecture practices.
+              Figures from client projects currently in production — counted after delivery, not estimated on paper.
             </p>
           </div>
           {/* beacon */}
@@ -311,8 +311,8 @@ function GrowthEngine() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600 self-center ml-0.5" />
             </span>
             <div className="font-mono text-[11px] leading-tight">
-              <p className="text-slate-900 font-bold">CONTINUOUS BULL RUN</p>
-              <p className="text-slate-500">100% Green Delivery • 0 Missed SLAs</p>
+              <p className="text-slate-900 font-bold">ON-TIME DELIVERY</p>
+              <p className="text-slate-500">100% Shipped • 0 Missed SLAs</p>
             </div>
           </div>
         </div>
@@ -335,9 +335,9 @@ function GrowthEngine() {
         {/* bottom accents */}
         <div className="p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-2xl mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           {[
-            { icon: TrendingUp, bg: 'bg-emerald-100', fg: 'text-emerald-700', title: 'Continuous Scaling', sub: 'Pipeline-driven delivery across all verticals.' },
-            { icon: Droplets, bg: 'bg-blue-100', fg: 'text-blue-700', title: 'Zero Drawdown Cycles', sub: 'Every milestone gate signed off before the next.' },
-            { icon: PieChart, bg: 'bg-indigo-100', fg: 'text-indigo-700', title: 'Capital Efficiency', sub: 'Startup-friendly budgets with enterprise rigor.' },
+            { icon: TrendingUp, bg: 'bg-emerald-100', fg: 'text-emerald-700', title: 'Work Ships Weekly', sub: 'Steady progress instead of one big drop at the end.' },
+            { icon: Droplets, bg: 'bg-blue-100', fg: 'text-blue-700', title: 'Signed Off Step By Step', sub: 'You approve each milestone before the next one starts.' },
+            { icon: PieChart, bg: 'bg-indigo-100', fg: 'text-indigo-700', title: 'Sensible Budgets', sub: 'Startup-friendly pricing with proper engineering behind it.' },
           ].map((a) => (
             <div key={a.title} className="flex items-start gap-3">
               <div className={`w-7 h-7 rounded-lg ${a.bg} ${a.fg} flex items-center justify-center shrink-0`}>
@@ -363,8 +363,8 @@ function FeaturedWork() {
     <section className="py-20 md:py-24 bg-slate-50/70 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <SectionHead
-          eyebrow="Delivered Systems"
-          title="Featured Engineering Work"
+          eyebrow="Our Work"
+          title="Featured projects"
           lede="Systems that shipped and stayed shipped."
         >
           <Link href="/portfolio" className="btn-outline !py-2.5 !px-4 text-xs mt-4 md:mt-0">
@@ -417,13 +417,13 @@ function CTA() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <span className="eyebrow">
           <span className="eyebrow-dot" />
-          Start Your Engagement
+          Get Started
         </span>
         <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
-          Let&apos;s engineer your next system.
+          Tell us what you need built.
         </h2>
         <p className="mt-4 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Schedule a consultation with our engineering leads. Mutual NDA covered, 24-hour response SLA, milestone-based delivery.
+          Talk to our engineers about your project. Mutual NDA, a reply within 24 hours and payment by milestones.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link href="/contact" className="btn-corp w-full sm:w-auto">

@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 const VALUES = [
   { icon: ShieldCheck, t: 'Engineering integrity', d: 'RBAC and audit trails by default; no hidden ads, dark patterns or shortcuts that erode trust.' },
   { icon: Target, t: 'Outcome ownership', d: 'We measure success by what runs in production — uptime, adoption and business metrics.' },
-  { icon: Lightbulb, t: 'Architecture first', d: 'Every engagement starts with system design so scale never forces a rewrite.' },
+  { icon: Lightbulb, t: 'Architecture first', d: 'Every project starts with system design, so growth never forces a full rewrite later.' },
   { icon: Users, t: 'Transparent delivery', d: 'Weekly demos, open estimates and direct access to the engineers building your product.' },
 ];
 
 const TIMELINE = [
   { y: '2026', t: 'Incorporated', d: 'Registered with the Ministry of Corporate Affairs on 28 July 2026 as a private limited company in West Bengal.' },
-  { y: '2026', t: 'Multi-vertical charter', d: 'Formed to deliver across five engineering verticals: games, enterprise software, mobile, web and cloud.' },
+  { y: '2026', t: 'Five areas of work', d: 'Formed to build in five areas: games, business software, mobile, web and cloud.' },
   { y: 'Next', t: 'Your project', d: 'We are built for our first wave of long-term clients — early partners get founding-team attention.' },
 ];
 
@@ -39,16 +39,15 @@ export default function AboutPage() {
               About Us
             </span>
             <h1 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] text-slate-900">
-              A new company with an <span className="text-corp-blue">enterprise-grade charter</span>
+              A new company, <span className="text-corp-blue">built by engineers</span>
             </h1>
             <p className="mt-5 text-lg text-slate-600 leading-relaxed">
-              Dream Ads Multi Solutions Private Limited is an Indian technology company incorporated to build
-              production software — games, office systems and platforms — with the discipline enterprises expect
-              and the pace founders need.
+              Dream Ads Multi Solutions Private Limited is a software company incorporated in July 2026. We build
+              games, business systems and online platforms — and we stay on to keep them running.
             </p>
             <p className="mt-4 text-slate-600 leading-relaxed">
-              We operate from Murshidabad, West Bengal and deliver remotely across India. Our leadership combines
-              product engineering, game development and infrastructure operations under one accountable team.
+              We work from Murshidabad, West Bengal and deliver across India. Product engineering, game development
+              and infrastructure sit in one team, so you always know who is accountable.
             </p>
           </Reveal>
 
@@ -86,8 +85,8 @@ export default function AboutPage() {
       {/* Values */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <SectionHead
-          eyebrow="What We Stand For"
-          title="Principles baked into the codebase"
+          eyebrow="How We Work"
+          title="Rules we don't bend"
           align="center"
         />
         <div className="grid sm:grid-cols-2 gap-5">
@@ -192,7 +191,7 @@ export default function AboutPage() {
       <section className="border-t border-slate-200 bg-slate-50/70">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid grid-cols-3 gap-4 text-center">
           {[
-            { to: 5, s: '', l: 'Engineering verticals' },
+            { to: 5, s: '', l: 'Areas of work' },
             { to: 2, s: '', l: 'Registered directors' },
             { to: 1, s: ' entity', l: 'MCA incorporated' },
           ].map((m, i) => (
