@@ -40,7 +40,7 @@ export default function SiteHeader() {
           <Link href="/" className="flex items-center group focus:outline-none min-w-0 py-1" title={COMPANY.legalName}>
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <Image
-                src="/logo.jpeg"
+                src="/logo.jpeg?v=2"
                 alt={`${COMPANY.shortName} Logo`}
                 width={40}
                 height={40}
